@@ -1,0 +1,61 @@
+.home {
+  /* padding: 20px; */
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  padding: 0 40px;
+}
+
+.tab {
+  padding: 20px;
+  transition: text-shadow 0.5s;
+  text-shadow: 0px 18px 28px #ffffff;
+  font-size: 52px;
+}
+
+.tab[data-active='true'] {
+  text-shadow: 0px 18px 28px #3e3e3e;
+}
+
+.tabCan {
+  display: flex;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.tabMainCan {
+  overflow: auto;
+  padding: 40px;
+  padding-top: 0px;
+}
+
+h3 {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.textBox {
+  background-color: aliceblue;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.fade {
+  transition: opacity 0.3s;
+}
+.fade[data-state='entering'],
+.fade[data-state='entered'],
+.fade[data-state='exit'] {
+  opacity: 1;
+}
+.fade[data-state='exiting'],
+.fade[data-state='enter'],
+.fade[data-state='exited'] {
+  opacity: 0;
+}

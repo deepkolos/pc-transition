@@ -1,0 +1,34 @@
+.can {
+  height: 78px;
+  width: 136px;
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  border-radius: 40px;
+  border: 1px solid #f0f0f0;
+  transition: background ease 0.4s;
+}
+
+.ball {
+  width: 56px;
+  height: 56px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform ease 0.3s;
+}
+
+.on.can {
+  background-color: #0097ff;
+}
+
+.on .ball {
+  transform: translateX(calc(136px - 12px - 56px));
+}
+
+.off.can {
+  background-color: #eeeeee;
+}
+
+.off .ball {
+  transform: translateX(12px);
+}
