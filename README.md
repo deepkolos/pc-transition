@@ -4,7 +4,7 @@
 ![](https://img.shields.io/npm/dt/pc-transition.svg)
 ![](https://img.shields.io/npm/v/pc-transition.svg)
 
-使用`hooks`编写的transition组件, 弥补了`preact`组件, 主要是之前使用的这个[preact-transition-group](https://github.com/andrewiggins/preact-transition-group)里的`CSSTransition`组件, 偶现入场动画不触发的情况, 故使用hooks实现了一个
+一个使用`hooks`编写的transition组件, 主要是之前使用的[preact-transition-group](https://github.com/andrewiggins/preact-transition-group)里的`CSSTransition`组件, 偶现入场动画不触发的情况, 故使用hooks实现了一个
 
 1. 接口与CSSTransition类似
 2. 大概90行代码
@@ -22,7 +22,7 @@
 | 参数          | 类型    | 默认值 | 描述                   |
 | ------------- | ------- | ------ | ---------------------- |
 | in            | boolean | false  | 是否过渡到entered      |
-| appear        | boolean |        | 刚创建的时候是否有动画 |
+| appear        | boolean | false  | 刚创建的时候是否有动画 |
 | className     | string  |        | className              |
 | unmountOnExit | number  | 0.13   | 滑动到下一页阈值       |
 
@@ -31,12 +31,12 @@
 
 | 事件名     | 参数 | 描述                          |
 | ---------- | ---- | ----------------------------- |
-| onEnter    |      | 进入前,相当于vue的enter       |
-| onEntering |      | 进入中,相当于vue的enterActive |
-| onEntered  |      | 进入后,相当于vue的enterTo     |
-| onExit     |      | 离开前,相当于vue的leave       |
-| onExiting  |      | 离开中,相当于vue的leaveActive |
-| onExited   |      | 离开后,相当于vue的leaveTo     |
+| onEnter    |      | 进入前, 相当于vue的enter       |
+| onEntering |      | 进入中, 相当于vue的enterActive |
+| onEntered  |      | 进入后, 相当于vue的enterTo     |
+| onExit     |      | 离开前, 相当于vue的leave       |
+| onExiting  |      | 离开中, 相当于vue的leaveActive |
+| onExited   |      | 离开后, 相当于vue的leaveTo     |
 
 
 # Demo Code
