@@ -105,7 +105,10 @@ function Home() {
           {createDemoTransition('UnmountOnExit', toggleBtn3, setToggleBtn3, {
             unmountOnExit: true,
           })}
-          {createDemoTransition('Events', toggleBtn4, setToggleBtn4, events)}
+          {createDemoTransition('Events', toggleBtn4, setToggleBtn4, {
+            ...events,
+            unmountOnExit: true,
+          })}
         </SwiperItem>
 
         <SwiperItem className={style.tabMainCan}>

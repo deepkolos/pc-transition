@@ -7,7 +7,7 @@
 一个使用`hooks`编写的transition组件, 主要是之前使用的[preact-transition-group](https://github.com/andrewiggins/preact-transition-group)里的`CSSTransition`组件, 偶现入场动画不触发的情况, 故使用hooks实现了一个
 
 1. 接口与CSSTransition类似
-2. 大概90行代码
+2. 大概80行代码
 3. 无需设置duration, duration与transition-duration一样
 4. 无需繁琐设置classNames传递一个className即可, css里配合data-state来命中状态
 

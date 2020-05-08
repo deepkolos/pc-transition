@@ -19,8 +19,7 @@ function Transition({
   onExited = nop,
 }) {
   const canRef = useRef()
-  const store = useRef({ lastShow: show, switching: appear })
-  const that = store.current
+  const { current: that } = useRef({ lastShow: show, switching: appear })
 
   const [renderId, setRenderId] = useState(0)
   const [domReady, setDomReady] = useState(false)
@@ -35,40 +34,32 @@ function Transition({
   if (show && !switching) state = 'entered'
   if (!show && !switching) state = 'exited'
 
-  if (!show && switching) {
-    that.entering = false
-    state = that.exiting ? 'exiting' : 'exit'
-    domReady && onExit()
+  if (switching) {
+    that[show ? 'exiting' : 'entering'] = false
+    state = show ? 'enter' : 'exit'
+    domReady && show ? onEnter() : onExit()
     domReady &&
       requestAnimationFrame(() => {
-        that.exiting = true
-        canRef.current && canRef.current.setAttribute('data-state', 'exiting')
-        onExiting()
-      })
-  }
-  if (show && switching) {
-    that.exiting = false
-    state = that.entering && domReady ? 'entering' : 'enter'
-    domReady && onEnter()
-    domReady &&
-      requestAnimationFrame(() => {
-        that.entering = true
-        canRef.current && canRef.current.setAttribute('data-state', 'entering')
-        onEntering()
+        that[show ? 'exiting' : 'entering'] = true
+
+        canRef.current &&
+          canRef.current.setAttribute(
+            'data-state',
+            show ? 'entering' : 'exiting',
+          )
+        show ? onEntering() : onExiting()
       })
   }
 
   useEffect(() => {
-    if (show && switching && !domReady)
-      requestAnimationFrame(() => setDomReady(true))
+    if (switching && !domReady) requestAnimationFrame(() => setDomReady(true))
   })
 
   const onTransitionEnd = e => {
     if (!(e.target === canRef.current && switching)) return
-    setRenderId(renderId + 1)
     that.switching = false
-    !show && onExited()
-    show && onEntered()
+    setRenderId(renderId + 1)
+    show ? onEntered() : onExited()
   }
 
   return renderDom ? (
