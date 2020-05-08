@@ -1,6 +1,6 @@
 {
   "name": "pc-transition",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "preact transition component",
   "main": "lib/pc-transition.js",
   "scripts": {
