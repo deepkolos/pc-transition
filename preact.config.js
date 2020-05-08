@@ -7,11 +7,11 @@ import WebpackAliasSyncPlugin from 'webpack-alias-sync-plugin'
 const p = str => path.resolve(__dirname, str)
 
 const module = cfg => {
-  cfg.entry = './components/swiper/index.js'
+  cfg.entry = './components/transition/index.js'
 
   cfg.devtool = 'source-map'
-  cfg.mode = 'development'
-  // cfg.mode = 'production'
+  // cfg.mode = 'development'
+  cfg.mode = 'production'
 
   cfg.output = {
     path: p('./lib'),
