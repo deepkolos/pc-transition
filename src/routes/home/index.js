@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import { h, Fragment } from 'preact'
 import style from './style'
 import 'pc-swiper/lib/pc-swiper.css'
 import { useRef, useState } from 'preact/hooks'
@@ -32,6 +32,8 @@ function Home() {
   const [toggleBtn1, setToggleBtn1] = useState(false)
   const [toggleBtn2, setToggleBtn2] = useState(true)
   const [toggleBtn3, setToggleBtn3] = useState(false)
+  const [toggleBtn4, setToggleBtn4] = useState(false)
+  const [toggleBtn5, setToggleBtn5] = useState(false)
 
   const onPageSwiperChange = i => {
     setPageIndex(i)
@@ -40,12 +42,45 @@ function Home() {
     setPageIndex(i)
     pageSwiperRef.current.goto(i)
   }
+  const log = type => () => console.log(type)
+
+  const events = {
+    onEnter: log('onEnter'),
+    onEntering: log('onEntering'),
+    onEntered: log('onEntered'),
+    onExit: log('onExit'),
+    onExiting: log('onExiting'),
+    onExited: log('onExited'),
+  }
+
+  const createDemoTransition = (
+    title,
+    val,
+    setVal,
+    cfg,
+    slot = 'text',
+    className = style.fade,
+  ) => (
+    <Fragment>
+      <h3>
+        {title}
+        <Switch
+          value={val}
+          className={style.switch}
+          onChange={() => setVal(!val)}
+        />
+      </h3>
+      <Transition in={val} className={className} {...cfg}>
+        {slot}
+      </Transition>
+    </Fragment>
+  )
 
   return (
     <div class={style.home}>
       <h1 className={style.title}>PC-Transition</h1>
       <div className={style.tabCan}>
-        {['基础'].map((v, k) => (
+        {['基础', '实例'].map((v, k) => (
           <div
             className={style.tab}
             data-active={pageIndex === k}
@@ -56,40 +91,35 @@ function Home() {
         ))}
       </div>
 
-      <Swiper onSwipeEnd={onPageSwiperChange} overflow ref={pageSwiperRef}>
+      <Swiper
+        onSwipeEnd={onPageSwiperChange}
+        overflow
+        ref={pageSwiperRef}
+        className={style.swiper}
+      >
         <SwiperItem className={style.tabMainCan}>
-          <h3>
-            Default
-            <Switch
-              className={style.switch}
-              onChange={() => setToggleBtn1(!toggleBtn1)}
-            />
-          </h3>
-          <Transition in={toggleBtn1} className={style.fade}>
-            text
-          </Transition>
+          {createDemoTransition('Default', toggleBtn1, setToggleBtn1)}
+          {createDemoTransition('Appear', toggleBtn2, setToggleBtn2, {
+            appear: true,
+          })}
+          {createDemoTransition('UnmountOnExit', toggleBtn3, setToggleBtn3, {
+            unmountOnExit: true,
+          })}
+          {createDemoTransition('Events', toggleBtn4, setToggleBtn4, events)}
+        </SwiperItem>
 
-          <h3>
-            Appear
-            <Switch
-              className={style.switch}
-              onChange={() => setToggleBtn2(!toggleBtn2)}
-            />
-          </h3>
-          <Transition in={toggleBtn2} className={style.fade} appear>
-            text
-          </Transition>
-
-          <h3>
-            UnmountOnExit
-            <Switch
-              className={style.switch}
-              onChange={() => setToggleBtn3(!toggleBtn3)}
-            />
-          </h3>
-          <Transition in={toggleBtn3} className={style.fade} unmountOnExit>
-            <div className={style.textBox}>text</div>
-          </Transition>
+        <SwiperItem className={style.tabMainCan}>
+          {createDemoTransition(
+            '弹窗',
+            toggleBtn5,
+            setToggleBtn5,
+            { unmountOnExit: true },
+            <div className={style.popup}>
+              <div>弹窗</div>
+              <button onClick={() => setToggleBtn5(!toggleBtn5)}>确定</button>
+            </div>,
+            style.zoom,
+          )}
         </SwiperItem>
       </Swiper>
     </div>

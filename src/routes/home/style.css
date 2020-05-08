@@ -33,6 +33,10 @@
   padding-top: 0px;
 }
 
+.swiper {
+  flex-grow: 1;
+}
+
 h3 {
   width: 100%;
   display: inline-flex;
@@ -44,6 +48,18 @@ h3 {
   background-color: aliceblue;
   padding: 30px;
   border-radius: 10px;
+}
+
+.popup {
+  width: 100%;
+  text-align: center;
+  border-radius: 25px;
+  background-color: #e5f3ff;
+  padding: 50px;
+}
+
+.popup button {
+  margin-top: 30px;
 }
 
 .fade {
@@ -58,4 +74,20 @@ h3 {
 .fade[data-state='enter'],
 .fade[data-state='exited'] {
   opacity: 0;
+}
+
+.zoom {
+  transition: all 0.3s;
+}
+.zoom[data-state='entering'],
+.zoom[data-state='entered'],
+.zoom[data-state='exit'] {
+  opacity: 1;
+  transform: scale(1);
+}
+.zoom[data-state='exiting'],
+.zoom[data-state='enter'],
+.zoom[data-state='exited'] {
+  opacity: 0;
+  transform: scale(0.3);
 }

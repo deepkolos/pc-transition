@@ -38,22 +38,22 @@ function Transition({
   if (!show && switching) {
     that.entering = false
     state = that.exiting ? 'exiting' : 'exit'
-    that.exiting ? onExit() : onExiting()
+    domReady && onExit()
     domReady &&
       requestAnimationFrame(() => {
         that.exiting = true
-        canRef.current.setAttribute('data-state', 'exiting')
+        canRef.current && canRef.current.setAttribute('data-state', 'exiting')
         onExiting()
       })
   }
   if (show && switching) {
     that.exiting = false
     state = that.entering && domReady ? 'entering' : 'enter'
-    that.entering && domReady ? onEntering() : onEnter()
+    domReady && onEnter()
     domReady &&
       requestAnimationFrame(() => {
         that.entering = true
-        canRef.current.setAttribute('data-state', 'entering')
+        canRef.current && canRef.current.setAttribute('data-state', 'entering')
         onEntering()
       })
   }
