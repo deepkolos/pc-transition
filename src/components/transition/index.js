@@ -37,11 +37,10 @@ function Transition({
   if (switching) {
     that[show ? 'exiting' : 'entering'] = false
     state = show ? 'enter' : 'exit'
-    domReady && show ? onEnter() : onExit()
+    show ? onEnter() : onExit()
     domReady &&
       requestAnimationFrame(() => {
         that[show ? 'exiting' : 'entering'] = true
-
         canRef.current &&
           canRef.current.setAttribute(
             'data-state',
@@ -51,9 +50,7 @@ function Transition({
       })
   }
 
-  useEffect(() => {
-    if (switching && !domReady) requestAnimationFrame(() => setDomReady(true))
-  })
+  useEffect(() => !domReady && requestAnimationFrame(() => setDomReady(true)))
 
   const onTransitionEnd = e => {
     if (!(e.target === canRef.current && switching)) return
